@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;go&quot;,&quot;php&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,11 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="go">go</a>
+              <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -242,11 +243,30 @@
               </ul>
           </li>
           <li>
+            <a href="#23e2e330ae" class="toc-h1 toc-link" data-title="读书笔记">读书笔记</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#8c104329ce" class="toc-h2 toc-link" data-title="《深入理解计算机系统》">《深入理解计算机系统》</a>
+                  </li>
+                  <li>
+                    <a href="#da7ade9caa" class="toc-h2 toc-link" data-title="《深入浅出计算机组成原理》">《深入浅出计算机组成原理》</a>
+                  </li>
+                  <li>
+                    <a href="#redis" class="toc-h2 toc-link" data-title="《Redis设计与实现》">《Redis设计与实现》</a>
+                  </li>
+                  <li>
+                    <a href="#mysql" class="toc-h2 toc-link" data-title="《MySQL权威指南》">《MySQL权威指南》</a>
+                  </li>
+                  <li>
+                    <a href="#http" class="toc-h2 toc-link" data-title="《HTTP权威指南》">《HTTP权威指南》</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -432,7 +452,91 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to delete</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h1 id='23e2e330ae'>读书笔记</h1><h2 id='8c104329ce'>《深入理解计算机系统》</h2><h2 id='da7ade9caa'>《深入浅出计算机组成原理》</h2><h3 id='9c405a1695'>入门篇</h3>
+<ul>
+<li>计算机的基本硬件组成：CPU、内存、主板、I/O设备、显卡</li>
+<li>冯·诺依曼体系结构：运算器、控制器、存储器、输入设备、输出设备</li>
+<li>知识地图 <img src="images/zhishiditu.png" alt="image" /></li>
+<li>性能是什么？
+
+<ul>
+<li>性能 = 1/ 响应时间</li>
+<li>程序的CPU执行时间 =CPU时钟周期数 × 时钟周期时间</li>
+<li>程序的CPU执行时间 = 指令数 × CPI × Clock Cycle Time</li>
+</ul></li>
+<li>从哪些方面提升性能
+
+<ul>
+<li>加速大概率事件</li>
+<li>通过流水线提高性能</li>
+<li>通过预测提高性能</li>
+</ul></li>
+</ul>
+<h3 id='d1b5731418'>原理篇：指令和运算</h3>
+<ul>
+<li>指令分类 
+<img src="images/zhilingfenlei.png" alt="image" /></li>
+<li><a href="https://zhuanlan.zhihu.com/p/27339191">函数调用及栈帧原理</a></li>
+<li>函数内联的利与弊
+
+<ul>
+<li>优点：CPU需要执行的指令数变少了，根据地址跳转的过程不需要了，压栈和出栈的过程也不用了。</li>
+<li>缺点：内联意味着，我们把可以复用的程序指令在调用它的地方完全展开了。如果一个函数在很多地方都被调用了，那么就会展开很多次，整个程序占用的空间就会变大了。</li>
+</ul></li>
+<li>“C语言代码-汇编代码-机器码” 这个过程，在我们的计算机上进行的时候是由两部分组成的。
+
+<ul>
+<li>第一个部分由编译（Compile）、汇编（Assemble）以及链接（Link）三个阶段组成。在这三个阶段完成之后，我们就生成了一个可执行文件。</li>
+<li>第二部分，我们通过装载器（Loader）把可执行文件装载（Load）到内存中。CPU从内存中读取指令和数据，来开始真正执行程序。</li>
+</ul></li>
+<li>拆解程序执行 
+<img src="images/chengxuchaijie.png" alt="image" /></li>
+<li>ELF文件格式 
+<img src="images/elfformat.png" alt="image" /></li>
+<li>ELF有一个基本的文件头（File Header），用来表示这个文件的基本属性，比如是否是可执行文件，对应的CPU、操作系统等等。除了这些基本属性之外，大部分程序还有这么一些Section：
+
+<ol>
+<li>首先是.text Section，也叫作代码段代码段或者指令段（Code Section），用来保存程序的代码和指令；</li>
+<li>接着是.data Section，也叫作数据段数据段（Data Section），用来保存程序里面设置好的初始化数据信息；</li>
+<li>然后就是.rel.text Secion，叫作重定位表重定位表（Relocation Table）。重定位表里，保留的是当前的文件里面，哪些跳转地址其实是我们不知道的。比如上面的 link_example.o 里面，我们在main函数里面调用了add 和 printf 这两个函数，但是在链接发生之前，我们并不知道该跳转到哪里，这些信息就会存储在重定位表里；</li>
+<li>最后是.symtab Section，叫作符号表符号表（Symbol Table）。符号表保留了我们所说的当前文件里面定义的函数名称和对应地址的地址簿。</li>
+</ol></li>
+<li>程序装载面临的挑战
+
+<ul>
+<li>内存分段（问题：内存碎片；解决：内存交换） 
+<img src="images/neicunfenduan.png" alt="image" /></li>
+<li>内存分页 
+<img src="images/neicunfenye.png" alt="image" /></li>
+<li>在虚拟内存、内存交换和内存分页这三者结合之下，你会发现，其实要运行一个程序，“必需”的内存是很少的。CPU只需要执行当前的指令，极限情况下，内存也只需要加载一页就好了。再大的程序，也可以分成一页。每次，只在需要用到对应的数据和指令的时候，从硬盘上交换到内存里面来就好了。</li>
+</ul></li>
+<li>动态链接：PLT和GOT</li>
+<li>二进制：<a href="https://www.imooc.com/article/16813?block_id=tuijian_wz">原码 反码 补码</a></li>
+<li>字符串的表示：ASCII码 字符集 字符编码</li>
+<li>门电路 
+<img src="images/mendianlu.png" alt="image" /></li>
+<li>半加器 
+<img src="images/banjiaqi.png" alt="image" /></li>
+<li>全加器 
+<img src="images/quanjiaqi.png" alt="image" /></li>
+<li>八位加法器 
+<img src="images/baweijiafaqi.png" alt="image" /></li>
+<li>门电路 -&gt; 半加器 -&gt; 全加器 -&gt; 加法器 -&gt; ALU</li>
+<li>二进制13x9计算过程
+<img src="images/chengfa.png" alt="image" /></li>
+<li>顺序乘法的实现过程（加法+移位）
+<img src="images/shunxuchengfa.png" alt="image" /></li>
+<li>乘法器 通过电路并行，减少门延迟，加速</li>
+<li><a href="http://www.ruanyifeng.com/blog/2010/06/ieee_floating-point_representation.html">浮点数的二进制表示</a></li>
+<li>小数二进制转十进制 0.1001 = $1x2^{-1} + $0x2^{-2} + $0x2^{-3} + $1x2^{-4} = 0.5625</li>
+<li>小数十进制转二进制：乘以2，如果超过1，我们就记下1，并把结果减去1，进一步循环操作。
+
+<ul>
+<li>在这里，我们就会看到，0.1其实变成了一个无限循环的二进制小数，0.000110011。这里的“0011”会无限循环下去。</li>
+<li><img src="images/xiaoshuerjinzhi.png" alt="image" /></li>
+</ul></li>
+</ul>
+<h2 id='redis'>《Redis设计与实现》</h2><h2 id='mysql'>《MySQL权威指南》</h2><h2 id='http'>《HTTP权威指南》</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
@@ -494,10 +598,11 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="go">go</a>
+                <a href="#" data-language-name="php">php</a>
                 <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
     </div>
